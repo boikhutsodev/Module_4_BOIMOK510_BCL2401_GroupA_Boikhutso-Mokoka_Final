@@ -1,18 +1,17 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import { createStore } from "vuex"; // Use createStore from vuex
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
-  state: {
-    products: [],
-    categories: [],
-    cart: JSON.parse(localStorage.getItem("cart")) || [],
-    comparison: [],
-    user: null,
-    jwt: localStorage.getItem("jwt") || "",
+export default createStore({
+  state() {
+    return {
+      products: [],
+      categories: [],
+      cart: JSON.parse(localStorage.getItem("cart")) || [],
+      comparison: [],
+      user: null,
+      jwt: localStorage.getItem("jwt") || "",
+    };
   },
   mutations: {
     setProducts(state, products) {
@@ -42,27 +41,37 @@ export default new Vuex.Store({
   },
   actions: {
     async fetchProducts({ commit }) {
-      const response = await axios.get("https://fakestoreapi.com/products");
-      commit("setProducts", response.data);
+      try {
+        const response = await axios.get("https://fakestoreapi.com/products");
+        commit("setProducts", response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     },
     async fetchCategories({ commit }) {
-      const response = await axios.get(
-        "https://fakestoreapi.com/products/categories"
-      );
-      commit("setCategories", response.data);
+      try {
+        const response = await axios.get(
+          "https://fakestoreapi.com/products/categories"
+        );
+        commit("setCategories", response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
     },
     async login({ commit }, credentials) {
-      const response = await axios.post(
-        "https://fakestoreapi.com/auth/login",
-        credentials,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      const { token } = response.data;
-      const user = jwtDecode(token);
-      commit("setJWT", token);
-      commit("setUser", user);
+      try {
+        const response = await axios.post(
+          "https://fakestoreapi.com/auth/login",
+          credentials,
+          { headers: { "Content-Type": "application/json" } }
+        );
+        const { token } = response.data;
+        const user = jwtDecode(token);
+        commit("setJWT", token);
+        commit("setUser", user);
+      } catch (error) {
+        console.error("Error logging in:", error);
+      }
     },
   },
 });

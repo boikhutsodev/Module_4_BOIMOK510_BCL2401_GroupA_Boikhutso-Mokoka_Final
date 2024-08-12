@@ -1,10 +1,8 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import { createRouter, createWebHistory } from "vue-router"; // Use named imports
 import Home from "../views/Home.vue";
 import ProductDetail from "../views/ProductDetail.vue";
 import Cart from "../views/Cart.vue";
-
-Vue.use(VueRouter);
+import Comparison from "../views/Comparison.vue"; // Ensure this view exists
 
 const routes = [
   { path: "/", component: Home },
@@ -13,8 +11,8 @@ const routes = [
   { path: "/comparison", component: Comparison },
 ];
 
-const router = new VueRouter({
-  mode: "history",
+const router = createRouter({
+  history: createWebHistory(), // Use createWebHistory for history mode
   routes,
 });
 

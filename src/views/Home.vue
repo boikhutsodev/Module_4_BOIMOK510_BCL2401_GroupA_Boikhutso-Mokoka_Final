@@ -30,23 +30,29 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { computed, ref, onMounted } from "vue";
+import { useStore } from "vuex";
 
 export default {
-  data() {
-    return {
-      loading: true,
+  setup() {
+    const store = useStore();
+    const loading = ref(true);
+
+    const products = computed(() => store.state.products);
+
+    const fetchProducts = async () => {
+      await store.dispatch("fetchProducts");
+      loading.value = false;
     };
-  },
-  computed: {
-    ...mapState(["products"]),
-  },
-  methods: {
-    ...mapActions(["fetchProducts"]),
-  },
-  async created() {
-    await this.fetchProducts();
-    this.loading = false;
+
+    onMounted(() => {
+      fetchProducts();
+    });
+
+    return {
+      loading,
+      products,
+    };
   },
 };
 </script>
