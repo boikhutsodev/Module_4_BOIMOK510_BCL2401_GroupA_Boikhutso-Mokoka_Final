@@ -1,36 +1,17 @@
-// src/router/index.js
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "@/views/Home.vue";
+import ProductDetail from "@/views/ProductDetail.vue";
 
-import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
-import ProductDetail from "../views/ProductDetail.vue";
-
-/**
- * The routes for the application.
- *
- * @type {Array<Object>}
- */
+Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
-    path: "/product/:id",
-    name: "ProductDetail",
-    component: ProductDetail,
-  },
+  { path: "/", component: Home },
+  { path: "/product/:id", component: ProductDetail },
 ];
 
-/**
- * Creates and configures the router.
- *
- * @returns {Router} The router instance.
- */
-
-const router = createRouter({
-  history: createWebHistory(),
+const router = new VueRouter({
+  mode: "history",
   routes,
 });
 
