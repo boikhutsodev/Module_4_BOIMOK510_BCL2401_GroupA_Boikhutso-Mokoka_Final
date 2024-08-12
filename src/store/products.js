@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import jwtDecode from "jwt-decode";
 
 export const useProductStore = defineStore("productStore", {
   state: () => ({
@@ -43,6 +42,7 @@ export const useProductStore = defineStore("productStore", {
           }
         );
         const { token } = response.data;
+        const { default: jwtDecode } = await import("jwt-decode"); // Dynamic import
         const user = jwtDecode(token);
         this.jwt = token;
         localStorage.setItem("jwt", token);

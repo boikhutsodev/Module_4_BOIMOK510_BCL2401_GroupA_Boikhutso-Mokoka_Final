@@ -11,47 +11,40 @@
         :key="product.id"
         class="product-card border rounded-lg p-4"
       >
-        <img
-          :src="product.image"
-          alt=""
-          class="w-full h-48 object-cover mb-2"
-        />
-        <h2 class="text-lg font-semibold">{{ product.title }}</h2>
-        <p class="text-gray-500">{{ product.price }}</p>
-        <p class="text-gray-400 text-sm">{{ product.category }}</p>
         <router-link
           :to="`/product/${product.id}`"
           class="text-blue-500 hover:underline"
-          >View Details</router-link
         >
+          <img
+            :src="product.image"
+            alt=""
+            class="w-full h-48 object-cover mb-2"
+        /></router-link>
+        <h2 class="text-lg font-semibold">{{ product.title }}</h2>
+        <p class="text-gray-500">{{ product.price }}</p>
+        <p class="text-gray-400 text-sm">{{ product.category }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, ref, onMounted } from "vue";
-import { useStore } from "vuex";
+import { computed, onMounted } from "vue";
+import { useProductStore } from "../store/products"; // Adjust the path to where your store is located
 
 export default {
   setup() {
-    const store = useStore();
-    const loading = ref(true);
-
-    const products = computed(() => store.state.products);
-
-    const fetchProducts = async () => {
-      await store.dispatch("fetchProducts");
-      loading.value = false;
-    };
+    const store = useProductStore();
+    const products = computed(() => store.products);
+    const loading = computed(() => store.loading);
 
     onMounted(() => {
-      fetchProducts();
+      store.fetchProducts();
     });
 
     return {
-      loading,
       products,
+      loading,
     };
   },
 };
