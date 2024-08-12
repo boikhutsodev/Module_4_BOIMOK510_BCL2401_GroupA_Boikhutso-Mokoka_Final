@@ -1,4 +1,4 @@
-import { createStore } from "vuex"; // Use createStore from vuex
+import { createStore } from "vuex";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
@@ -63,7 +63,9 @@ export default createStore({
         const response = await axios.post(
           "https://fakestoreapi.com/auth/login",
           credentials,
-          { headers: { "Content-Type": "application/json" } }
+          {
+            headers: { "Content-Type": "application/json" },
+          }
         );
         const { token } = response.data;
         const user = jwtDecode(token);
