@@ -45,18 +45,30 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { computed } from "vue";
+import { useProductStore } from "../store/products"; // Adjust the path as needed
 
 export default {
-  computed: {
-    ...mapState(["comparison"]),
-  },
-  methods: {
-    ...mapMutations(["setComparison"]),
-    removeFromComparison(id) {
-      const newComparison = this.comparison.filter((item) => item.id !== id);
-      this.setComparison(newComparison);
-    },
+  setup() {
+    const productStore = useProductStore();
+
+    const comparison = computed(() => productStore.comparison);
+
+    const removeFromComparison = (id) => {
+      const newComparison = productStore.comparison.filter(
+        (item) => item.id !== id
+      );
+      productStore.setComparison(newComparison);
+    };
+
+    return {
+      comparison,
+      removeFromComparison,
+    };
   },
 };
 </script>
+
+<style scoped>
+/* Add any additional styles here */
+</style>
