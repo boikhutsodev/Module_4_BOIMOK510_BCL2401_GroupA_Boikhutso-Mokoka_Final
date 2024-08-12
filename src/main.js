@@ -1,12 +1,12 @@
-//src/main.vue
-
-import { createApp } from "vue";
-import "./style.css";
+import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
+import store from "./store";
 
-/**
- * Initializes the Vue application and mounts it to the DOM.
- */
+Vue.config.productionTip = false;
 
-createApp(App).use(router).mount("#app");
+new Vue({
+  router,
+  store,
+  render: (h) => h(App),
+}).$mount("#app");
