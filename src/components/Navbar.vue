@@ -8,7 +8,7 @@
     <div class="space-x-4 flex">
       <router-link to="/" class="hover:text-yellow-200">Home</router-link>
       <router-link to="./" class="hover:text-yellow-200">Wishlist</router-link>
-      <router-link to="./" class="hover:text-yellow-200">
+      <router-link :to="{ name: 'Cart' }" class="hover:text-yellow-200">
         <svg
           width="32px"
           height="32px"

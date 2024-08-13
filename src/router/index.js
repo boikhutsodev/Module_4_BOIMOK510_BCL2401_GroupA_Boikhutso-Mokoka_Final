@@ -7,7 +7,7 @@ import Comparison from "../views/Comparison.vue"; // Ensure this view exists
 const routes = [
   { path: "/", component: Home },
   { path: "/product/:id", component: ProductDetail },
-  { path: "/cart", component: Cart },
+  { path: "/cart", name: "Cart", component: Cart },
   { path: "/comparison", component: Comparison },
 ];
 

@@ -1,18 +1,14 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-export const useProductStore = defineStore("productStore", {
+export const useProductStore = defineStore("product", {
   state: () => ({
     products: [],
-    categories: [],
-    cart: JSON.parse(localStorage.getItem("cart")) || [],
-    comparison: [],
-    user: null,
-    jwt: localStorage.getItem("jwt") || "",
-    loading: true,
+    loading: false,
   }),
   actions: {
     async fetchProducts() {
+      this.loading = true;
       try {
         const response = await axios.get("https://fakestoreapi.com/products");
         this.products = response.data;
@@ -21,39 +17,6 @@ export const useProductStore = defineStore("productStore", {
       } finally {
         this.loading = false;
       }
-    },
-    async fetchCategories() {
-      try {
-        const response = await axios.get(
-          "https://fakestoreapi.com/products/categories"
-        );
-        this.categories = response.data;
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    },
-    async login(credentials) {
-      try {
-        const response = await axios.post(
-          "https://fakestoreapi.com/auth/login",
-          credentials,
-          {
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-        const { token } = response.data;
-        const { default: jwtDecode } = await import("jwt-decode"); // Dynamic import
-        const user = jwtDecode(token);
-        this.jwt = token;
-        localStorage.setItem("jwt", token);
-        this.user = user;
-      } catch (error) {
-        console.error("Error logging in:", error);
-      }
-    },
-    clearJWT() {
-      this.jwt = "";
-      localStorage.removeItem("jwt");
     },
   },
 });
