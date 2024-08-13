@@ -1,11 +1,11 @@
 <template>
-  <div class="container mx-auto py-4">
+  <div class="container w-full mx-auto py-4">
     <h1 class="text-3xl font-bold mb-4">Shopping Cart</h1>
 
     <div v-if="cartItems.length > 0">
       <ul>
         <li v-for="item in cartItems" :key="item.id" class="border-b py-2">
-          <div class="flex justify-between items-center">
+          <div class="flex justify-between items-center px-8">
             <div>
               <h2 class="text-lg font-semibold">{{ item.title }}</h2>
               <p class="text-gray-500">{{ item.price | currency }}</p>
