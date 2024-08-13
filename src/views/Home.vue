@@ -23,28 +23,75 @@
         <h2 class="text-lg font-semibold">{{ product.title }}</h2>
         <p class="text-gray-500">{{ product.price }}</p>
         <p class="text-gray-400 text-sm">{{ product.category }}</p>
+        <!-- Ratings -->
+        <div class="flex items-center mb-2">
+          <span class="text-yellow-500">{{ product.rating.rate }}</span>
+          <span class="ml-1 text-gray-500"
+            >({{ product.rating.count }} reviews)</span
+          >
+        </div>
+
+        <!-- Cart and Favorite Buttons -->
+        <div class="flex space-x-2">
+          <button
+            @click="addToCart(product)"
+            class="bg-green-500 text-white px-4 py-2 rounded"
+          >
+            Add to Cart
+          </button>
+          <button
+            @click="toggleFavorite(product)"
+            :class="isFavorite(product.id) ? 'bg-red-500' : 'bg-gray-500'"
+            class="text-white px-4 py-2 rounded"
+          >
+            {{
+              isFavorite(product.id)
+                ? "Remove from Favorites"
+                : "Add to Favorites"
+            }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useProductStore } from "../store/products"; // Adjust the path to where your store is located
+import { useCartStore } from "../store/cart";
+import { useFavoriteStore } from "../store/favorites";
 
 export default {
   setup() {
     const store = useProductStore();
     const products = computed(() => store.products);
     const loading = computed(() => store.loading);
+    const cartStore = useCartStore();
+    const favoriteStore = useFavoriteStore();
 
     onMounted(() => {
       store.fetchProducts();
     });
 
+    const addToCart = (product) => {
+      cartStore.addProduct(product);
+    };
+
+    const toggleFavorite = (product) => {
+      favoriteStore.toggleFavorite(product);
+    };
+
+    const isFavorite = (productId) => {
+      return favoriteStore.isFavorite(productId);
+    };
+
     return {
       products,
       loading,
+      addToCart,
+      toggleFavorite,
+      isFavorite,
     };
   },
 };
