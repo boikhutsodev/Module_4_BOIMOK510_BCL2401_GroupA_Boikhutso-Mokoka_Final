@@ -1,61 +1,77 @@
 <template>
   <div class="container mx-auto py-4">
     <h1 class="text-3xl font-bold mb-4">Shopping Cart</h1>
-    <div v-if="loading" class="text-center">Loading...</div>
-    <div v-else-if="cartItems.length === 0" class="text-center">
-      Your cart is empty.
+
+    <div v-if="cartItems.length > 0">
+      <ul>
+        <li v-for="item in cartItems" :key="item.id" class="border-b py-2">
+          <div class="flex justify-between items-center">
+            <div>
+              <h2 class="text-lg font-semibold">{{ item.title }}</h2>
+              <p class="text-gray-500">{{ item.price | currency }}</p>
+              <p class="text-gray-600">Quantity: {{ item.quantity }}</p>
+            </div>
+            <div>
+              <button
+                @click="removeFromCart(item.id)"
+                class="bg-red-500 text-white px-4 py-2 rounded"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="mt-4">
+        <p class="text-lg font-bold">Total: {{ total | currency }}</p>
+        <button
+          @click="clearCart"
+          class="bg-yellow-500 text-white px-4 py-2 rounded mt-2"
+        >
+          Clear Cart
+        </button>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded mt-2 ml-2">
+          Proceed to Checkout
+        </button>
+      </div>
     </div>
     <div v-else>
-      <div
-        v-for="item in cartItems"
-        :key="item.id"
-        class="border rounded-lg p-4 mb-4"
-      >
-        <img :src="item.image" alt="" class="w-24 h-24 object-cover mb-2" />
-        <h2 class="text-lg font-semibold">{{ item.title }}</h2>
-        <p class="text-gray-500">{{ item.price }}</p>
-        <div class="flex items-center mt-2">
-          <button
-            @click="removeFromCart(item)"
-            class="bg-red-500 text-white px-4 py-2 rounded"
-          >
-            Remove
-          </button>
-        </div>
-      </div>
-      <div class="text-right font-bold mt-4">Total: {{ totalCost }}</div>
+      <p class="text-center text-gray-500">Your cart is empty.</p>
     </div>
   </div>
 </template>
 
 <script>
 import { computed } from "vue";
-import { useCartStore } from "../store/cart"; // Adjust the path to your store
+import { useCartStore } from "../store/cart"; // Adjust the path if necessary
 
 export default {
   setup() {
     const cartStore = useCartStore();
-    const cartItems = computed(() => cartStore.cartItems);
-    const loading = computed(() => cartStore.loading);
 
-    const totalCost = computed(() => {
-      return cartItems.value.reduce((total, item) => total + item.price, 0);
-    });
+    const cartItems = computed(() => cartStore.cart);
+    const total = computed(() =>
+      cartStore.cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    );
 
-    const removeFromCart = (item) => {
-      cartStore.removeProduct(item);
+    const removeFromCart = (itemId) => {
+      cartStore.removeProduct(itemId);
+    };
+
+    const clearCart = () => {
+      cartStore.clearCart();
     };
 
     return {
       cartItems,
-      loading,
-      totalCost,
+      total,
       removeFromCart,
+      clearCart,
     };
   },
 };
 </script>
 
 <style scoped>
-/* Add any additional styles here */
+/* Add your styles here if needed */
 </style>
