@@ -4,7 +4,7 @@
     <div v-if="loading" class="text-center">Loading...</div>
     <div
       v-else
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
     >
       <div
         v-for="product in products"
@@ -18,7 +18,7 @@
           <img
             :src="product.image"
             alt=""
-            class="w-full h-48 object-cover mb-2"
+            class="w-400px h-48 object-cover mb-2"
         /></router-link>
         <h2 class="text-lg font-semibold">{{ product.title }}</h2>
         <p class="text-gray-500">{{ product.price }}</p>
