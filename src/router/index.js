@@ -4,9 +4,11 @@ import ProductDetail from "../views/ProductDetail.vue";
 import FavoritesPage from "../views/Favorites.vue";
 import CartPage from "../views/Cart.vue";
 import LoginPage from "../views/Login.vue";
+import Comparison from "../views/Comparison.vue";
 
 const routes = [
   { path: "/", name: "Home", component: HomePage },
+  { path: "/comparison", name: "Comparison", component: Comparison },
   { path: "/product/:id", component: ProductDetail },
   { path: "/favorites", name: "Favorites", component: FavoritesPage },
   { path: "/cart", name: "Cart", component: CartPage },

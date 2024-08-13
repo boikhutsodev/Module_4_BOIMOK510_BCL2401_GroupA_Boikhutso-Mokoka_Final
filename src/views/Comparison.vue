@@ -1,68 +1,62 @@
 <template>
   <div class="container mx-auto py-4">
-    <h1 class="text-3xl font-bold mb-4">Comparison</h1>
-    <div v-if="comparison.length === 0" class="text-center">
-      No items to compare
+    <h1 class="text-3xl font-bold mb-4">Comparison List</h1>
+    <div v-if="comparisonList.length === 0" class="text-center text-gray-500">
+      No items in the comparison list.
     </div>
-    <div v-else>
-      <table class="min-w-full bg-white border">
-        <thead>
-          <tr>
-            <th class="px-6 py-3 border-b">Title</th>
-            <th class="px-6 py-3 border-b">Image</th>
-            <th class="px-6 py-3 border-b">Description</th>
-            <th class="px-6 py-3 border-b">Price</th>
-            <th class="px-6 py-3 border-b">Rating</th>
-            <th class="px-6 py-3 border-b">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in comparison" :key="item.id" class="text-center">
-            <td class="px-6 py-4 border-b">{{ item.title }}</td>
-            <td class="px-6 py-4 border-b">
-              <img
-                :src="item.image"
-                alt=""
-                class="w-16 h-16 object-cover mx-auto"
-              />
-            </td>
-            <td class="px-6 py-4 border-b">{{ item.description }}</td>
-            <td class="px-6 py-4 border-b">{{ item.price }}</td>
-            <td class="px-6 py-4 border-b">{{ item.rating.rate }}</td>
-            <td class="px-6 py-4 border-b">
-              <button
-                @click="removeFromComparison(item.id)"
-                class="bg-red-500 text-white px-4 py-2 rounded"
-              >
-                Remove
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div
+        v-for="product in comparisonList"
+        :key="product.id"
+        class="product-comparison-card border rounded-lg p-4"
+      >
+        <img
+          :src="product.image"
+          alt=""
+          class="w-full h-48 object-cover mb-2"
+        />
+        <h2 class="text-lg font-semibold">{{ product.title }}</h2>
+        <p class="text-gray-500">{{ product.price }}</p>
+        <p class="text-gray-400 text-sm">{{ product.category }}</p>
+        <p>{{ product.description }}</p>
+        <div class="flex items-center mb-2">
+          <span class="text-yellow-500">{{ product.rating.rate }}</span>
+          <span class="ml-1 text-gray-500"
+            >({{ product.rating.count }} reviews)</span
+          >
+        </div>
+        <button
+          @click="removeFromComparison(product.id)"
+          class="bg-red-500 text-white px-4 py-2 rounded"
+        >
+          Remove from Comparison
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { computed } from "vue";
-import { useProductStore } from "../store/products"; // Adjust the path as needed
+import { useProductStore } from "../store/products"; // Adjust the path to your store
 
 export default {
+  name: "Comparison",
   setup() {
-    const productStore = useProductStore();
+    const store = useProductStore();
 
-    const comparison = computed(() => productStore.comparison);
+    // Computed property to get the comparison list from the store
+    const comparisonList = computed(() =>
+      store.products.filter((product) => store.isInComparisonList(product.id))
+    );
 
-    const removeFromComparison = (id) => {
-      const newComparison = productStore.comparison.filter(
-        (item) => item.id !== id
-      );
-      productStore.setComparison(newComparison);
+    // Method to remove an item from the comparison list
+    const removeFromComparison = (productId) => {
+      store.removeFromComparisonList(productId);
     };
 
     return {
-      comparison,
+      comparisonList,
       removeFromComparison,
     };
   },
@@ -70,5 +64,10 @@ export default {
 </script>
 
 <style scoped>
-/* Add any additional styles here */
+.container {
+  margin-top: 60px; /* Adjust this if needed based on your Navbar */
+}
+.product-comparison-card {
+  max-width: 100%;
+}
 </style>

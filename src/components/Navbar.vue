@@ -3,6 +3,9 @@
     class="fixed top-0 left-0 w-full bg-pink-500 text-white flex justify-between p-4"
   >
     <router-link to="/" class="text-xl font-bold">My Store</router-link>
+    <router-link :to="{ name: 'Comparison' }" class="hover:text-yellow-200"
+      >Comparison</router-link
+    >
     <div class="space-x-4 flex">
       <router-link to="/" class="hover:text-yellow-200">Home</router-link>
       <router-link :to="{ name: 'Favorites' }" class="hover:text-yellow-200"
