@@ -1,50 +1,56 @@
 <template>
   <div class="container mx-auto py-4">
     <h1 class="text-3xl font-bold mb-4">Shopping Cart</h1>
-    <div v-if="cart.length === 0" class="text-center">Your cart is empty</div>
+    <div v-if="loading" class="text-center">Loading...</div>
+    <div v-else-if="cartItems.length === 0" class="text-center">
+      Your cart is empty.
+    </div>
     <div v-else>
-      <div v-for="item in cart" :key="item.id" class="border-b py-4">
+      <div
+        v-for="item in cartItems"
+        :key="item.id"
+        class="border rounded-lg p-4 mb-4"
+      >
+        <img :src="item.image" alt="" class="w-24 h-24 object-cover mb-2" />
         <h2 class="text-lg font-semibold">{{ item.title }}</h2>
-        <p class="text-gray-500 mb-2">{{ item.price.toFixed(2) }}</p>
-        <input
-          type="number"
-          v-model.number="item.quantity"
-          class="border p-2 mb-2"
-        />
-        <button
-          @click="removeFromCart(item.id)"
-          class="bg-red-500 text-white px-4 py-2 rounded"
-        >
-          Remove
-        </button>
+        <p class="text-gray-500">{{ item.price }}</p>
+        <div class="flex items-center mt-2">
+          <button
+            @click="removeFromCart(item)"
+            class="bg-red-500 text-white px-4 py-2 rounded"
+          >
+            Remove
+          </button>
+        </div>
       </div>
-      <p class="text-xl font-bold">Total: {{ total }}</p>
+      <div class="text-right font-bold mt-4">Total: {{ totalCost }}</div>
     </div>
   </div>
 </template>
 
 <script>
-import { useProductStore } from "../store/products"; // Adjust the import path if needed
+import { computed } from "vue";
+import { useCartStore } from "../store/cart"; // Adjust the path to your store
 
 export default {
   setup() {
-    const productStore = useProductStore();
+    const cartStore = useCartStore();
+    const cartItems = computed(() => cartStore.cartItems);
+    const loading = computed(() => cartStore.loading);
 
-    const removeFromCart = (id) => {
-      const newCart = productStore.cart.filter((item) => item.id !== id);
-      productStore.setCart(newCart);
-    };
-
-    const total = computed(() => {
-      return productStore.cart
-        .reduce((acc, item) => acc + item.price * item.quantity, 0)
-        .toFixed(2);
+    const totalCost = computed(() => {
+      return cartItems.value.reduce((total, item) => total + item.price, 0);
     });
 
+    const removeFromCart = (item) => {
+      cartStore.removeProduct(item);
+    };
+
     return {
-      cart: productStore.cart,
+      cartItems,
+      loading,
+      totalCost,
       removeFromCart,
-      total,
     };
   },
 };

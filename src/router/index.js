@@ -1,18 +1,20 @@
-import { createRouter, createWebHistory } from "vue-router"; // Use named imports
-import Home from "../views/Home.vue";
+import { createRouter, createWebHistory } from "vue-router";
+import HomePage from "../views/Home.vue";
 import ProductDetail from "../views/ProductDetail.vue";
-import Cart from "../views/Cart.vue";
-import Comparison from "../views/Comparison.vue"; // Ensure this view exists
+import FavoritesPage from "../views/Favorites.vue";
+import CartPage from "../views/Cart.vue";
+import LoginPage from "../views/Login.vue";
 
 const routes = [
-  { path: "/", component: Home },
+  { path: "/", name: "Home", component: HomePage },
   { path: "/product/:id", component: ProductDetail },
-  { path: "/cart", name: "Cart", component: Cart },
-  { path: "/comparison", component: Comparison },
+  { path: "/favorites", name: "Favorites", component: FavoritesPage },
+  { path: "/cart", name: "Cart", component: CartPage },
+  { path: "/login", name: "Login", component: LoginPage },
 ];
 
 const router = createRouter({
-  history: createWebHistory(), // Use createWebHistory for history mode
+  history: createWebHistory(),
   routes,
 });
 

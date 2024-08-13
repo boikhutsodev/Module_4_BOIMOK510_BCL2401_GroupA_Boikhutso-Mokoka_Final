@@ -1,5 +1,3 @@
-<!-- src/components/Navbar.vue -->
-
 <template>
   <nav
     class="fixed top-0 left-0 w-full bg-pink-500 text-white flex justify-between p-4"
@@ -7,7 +5,9 @@
     <router-link to="/" class="text-xl font-bold">My Store</router-link>
     <div class="space-x-4 flex">
       <router-link to="/" class="hover:text-yellow-200">Home</router-link>
-      <router-link to="./" class="hover:text-yellow-200">Wishlist</router-link>
+      <router-link :to="{ name: 'Favorites' }" class="hover:text-yellow-200"
+        >Wishlist</router-link
+      >
       <router-link :to="{ name: 'Cart' }" class="hover:text-yellow-200">
         <svg
           width="32px"
@@ -42,7 +42,9 @@
           />
         </svg>
       </router-link>
-      <router-link to="./" class="hover:text-yellow-200">Login</router-link>
+      <router-link :to="{ name: 'Login' }" class="hover:text-yellow-200"
+        >Login</router-link
+      >
     </div>
   </nav>
 </template>
