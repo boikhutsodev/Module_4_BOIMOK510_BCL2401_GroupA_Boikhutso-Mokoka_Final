@@ -49,12 +49,15 @@
 </template>
 
 <script>
+import { computed } from "vue";
 import { useComparisonStore } from "../store/comparison";
 
 export default {
   setup() {
     const comparisonStore = useComparisonStore();
-    const comparedProducts = comparisonStore.comparedProducts;
+
+    // Use computed to make sure the array is reactive in the template
+    const comparedProducts = computed(() => comparisonStore.comparedProducts);
 
     const removeProduct = (productId) => {
       comparisonStore.removeProductFromCompare(productId);
