@@ -45,22 +45,14 @@
             :class="isFavorite(product.id) ? 'bg-red-500' : 'bg-gray-500'"
             class="text-white px-4 py-2 rounded"
           >
-            {{
-              isFavorite(product.id)
-                ? "Remove from Favorites"
-                : "Add to Favorites"
-            }}
+            {{ isFavorite(product.id) ? "- Favorites" : "+ Favorites" }}
           </button>
           <button
             @click="addToCompare(product)"
             :class="isInComparison(product.id) ? 'bg-blue-500' : 'bg-gray-500'"
             class="text-white px-4 py-2 rounded"
           >
-            {{
-              isInComparison(product.id)
-                ? "Remove from Compare"
-                : "Add to Compare"
-            }}
+            {{ isInComparison(product.id) ? "- Compare" : "+ Compare" }}
           </button>
         </div>
       </div>

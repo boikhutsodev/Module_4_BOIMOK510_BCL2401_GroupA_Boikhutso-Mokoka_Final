@@ -9,14 +9,16 @@
       <div
         v-for="item in favorites"
         :key="item.id"
-        class="border rounded-lg p-4 mb-4"
+        class="border rounded-lg p-4 mb-4 flex items-center space-x-4"
       >
-        <img :src="item.image" alt="" class="w-24 h-24 object-cover mb-2" />
-        <h2 class="text-lg font-semibold">{{ item.title }}</h2>
-        <p class="text-gray-500">{{ item.price }}</p>
+        <img :src="item.image" alt="" class="w-24 h-24 object-cover" />
+        <div class="flex-1">
+          <h2 class="text-lg font-semibold">{{ item.title }}</h2>
+          <p class="text-gray-500">{{ item.price }}</p>
+        </div>
         <button
           @click="removeFromFavorites(item)"
-          class="bg-red-500 text-white px-4 py-2 rounded"
+          class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition"
         >
           Remove from Favorites
         </button>
@@ -36,7 +38,7 @@ export default {
     const loading = computed(() => favoriteStore.loading);
 
     const removeFromFavorites = (item) => {
-      favoriteStore.removeFavorite(item);
+      favoriteStore.removeFavorite(item.id); // Ensure you're passing the correct identifier
     };
 
     return {
@@ -47,7 +49,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Add any additional styles here */
-</style>
