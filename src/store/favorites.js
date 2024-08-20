@@ -14,6 +14,13 @@ export const useFavoriteStore = defineStore("favorites", {
       }
       this.saveFavorites();
     },
+    removeFavorite(productId) {
+      const index = this.favorites.findIndex((item) => item.id === productId);
+      if (index !== -1) {
+        this.favorites.splice(index, 1);
+        this.saveFavorites(); // Ensure the updated favorites are saved
+      }
+    },
     isFavorite(productId) {
       return this.favorites.some((item) => item.id === productId);
     },
