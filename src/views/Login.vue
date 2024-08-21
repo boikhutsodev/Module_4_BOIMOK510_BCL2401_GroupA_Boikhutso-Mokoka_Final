@@ -1,6 +1,6 @@
 <template>
-  <div class="container mx-auto py-4">
-    <h1 class="text-3xl font-bold mb-4">Login</h1>
+  <div class="max-w-sm mx-auto">
+    <h1 class="text-3xl font-bold mt-20 mb-5">Login</h1>
     <form @submit.prevent="login">
       <div class="mb-4">
         <label for="username" class="block text-sm font-medium mb-1"
@@ -10,7 +10,7 @@
           v-model="username"
           id="username"
           type="text"
-          class="w-full px-3 py-2 border rounded"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           required
         />
       </div>
@@ -22,7 +22,7 @@
           v-model="password"
           id="password"
           type="password"
-          class="w-full px-3 py-2 border rounded"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           required
         />
       </div>
