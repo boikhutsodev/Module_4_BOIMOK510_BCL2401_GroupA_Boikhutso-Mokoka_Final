@@ -7,7 +7,6 @@
       >Comparison</router-link
     >
     <div class="space-x-4 flex">
-      <router-link to="/" class="hover:text-yellow-200">Home</router-link>
       <router-link :to="{ name: 'Favorites' }" class="hover:text-yellow-200"
         >Wishlist</router-link
       >
@@ -53,12 +52,6 @@
 </template>
 
 <script>
-/**
- * The navigation bar component.
- *
- * @component
- */
-
 export default {
   name: "Navbar",
 };
