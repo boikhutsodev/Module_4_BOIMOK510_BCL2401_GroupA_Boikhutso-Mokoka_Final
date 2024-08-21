@@ -3,9 +3,9 @@
     <h1 class="text-3xl font-bold mt-20 m-auto">Login</h1>
     <form @submit.prevent="login">
       <div class="mb-4">
-        <label for="username" class="block text-sm font-medium mb-1"
-          >Username</label
-        >
+        <label for="username" class="block text-sm font-medium mb-1">
+          Username
+        </label>
         <input
           v-model="username"
           id="username"
@@ -15,13 +15,13 @@
         />
       </div>
       <div class="mb-4">
-        <label for="password" class="block text-sm font-medium mb-1"
-          >Password</label
-        >
+        <label for="password" class="block text-sm font-medium mb-1">
+          Password
+        </label>
         <input
           v-model="password"
+          :type="showPassword ? 'text' : 'password'"
           id="password"
-          type="password"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           required
         />
