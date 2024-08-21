@@ -26,7 +26,7 @@ This is an e-commerce web application built using Vue.js. The application allows
 
 ## Presentation
 
-[Link to the live demo](#)
+[Link to the presentation](https://youtu.be/RkYoZhC7RkE)
 
 ## Technologies Used
 
