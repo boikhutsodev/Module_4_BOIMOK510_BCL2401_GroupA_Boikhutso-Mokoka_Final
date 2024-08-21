@@ -1,6 +1,10 @@
 <template>
   <div class="container mx-auto py-4">
-    <h1 class="text-3xl font-bold mb-4">Products</h1>
+    <h1
+      class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
+    >
+      Products
+    </h1>
 
     <div class="mt-20 flex justify-between items-center flex-wrap mb-4">
       <select
