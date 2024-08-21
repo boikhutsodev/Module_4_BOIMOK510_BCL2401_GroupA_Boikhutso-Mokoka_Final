@@ -11,7 +11,7 @@
     <div v-else class="product-details border rounded-lg p-4">
       <img :src="product.image" alt="" class="w-64 h-64 object-cover mb-4" />
       <h2 class="text-2xl font-semibold mb-2">{{ product.title }}</h2>
-      <p class="text-gray-600 text-xl mb-2">{{ product.price }}</p>
+      <p class="text-gray-600 text-xl mb-2">${{ product.price }}</p>
       <p class="text-gray-500 text-sm mb-4">{{ product.category }}</p>
       <div class="flex items-center mb-4">
         <span class="text-yellow-500">{{ product.rating.rate }}</span>

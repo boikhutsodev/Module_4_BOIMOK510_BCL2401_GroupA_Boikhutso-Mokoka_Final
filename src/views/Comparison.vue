@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto py-8">
-    <h1 class="text-3xl font-bold mb-6">Comparison List</h1>
+    <h1 class="text-3xl font-bold mb-6 mt-20">Comparison List</h1>
     <div v-if="comparedProducts.length === 0" class="text-center">
       <p>No products to compare.</p>
     </div>
@@ -22,7 +22,7 @@
               <img :src="product.image" alt="" class="w-20 h-20 object-cover" />
             </td>
             <td class="p-4">{{ product.title }}</td>
-            <td class="p-4">{{ product.price }}</td>
+            <td class="p-4">${{ product.price }}</td>
             <td class="p-4">{{ product.rating.rate }}</td>
             <td class="p-4">{{ product.category }}</td>
             <td class="p-4">

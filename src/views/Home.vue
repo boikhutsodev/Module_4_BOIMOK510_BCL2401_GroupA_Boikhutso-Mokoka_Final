@@ -1,12 +1,12 @@
 <template>
   <div class="container mx-auto py-4">
     <h1
-      class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
+      class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white mb-4 mt-20"
     >
       Products
     </h1>
 
-    <div class="mt-20 flex justify-between items-center flex-wrap mb-4">
+    <div class="flex justify-between items-center flex-wrap mb-4">
       <select
         v-model="selectedCategory"
         class="border p-2 rounded mb-2 sm:mb-0"

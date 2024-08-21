@@ -1,6 +1,6 @@
 <template>
   <div class="container w-full mx-auto py-4">
-    <h1 class="text-3xl font-bold mb-4">Shopping Cart</h1>
+    <h1 class="text-3xl font-bold mb-4 mt-20">Shopping Cart</h1>
 
     <div v-if="cartItems.length > 0">
       <ul>
@@ -8,7 +8,7 @@
           <div class="flex justify-between items-center px-8">
             <div>
               <h2 class="text-lg font-semibold">{{ item.title }}</h2>
-              <p class="text-gray-500">{{ item.price | currency }}</p>
+              <p class="text-gray-500">${{ item.price | currency }}</p>
               <p class="text-gray-600">Quantity: {{ item.quantity }}</p>
             </div>
             <div>
@@ -23,7 +23,7 @@
         </li>
       </ul>
       <div class="mt-4">
-        <p class="text-lg font-bold">Total: {{ total | currency }}</p>
+        <p class="text-lg font-bold">Total: ${{ total | currency }}</p>
         <button
           @click="clearCart"
           class="bg-yellow-500 text-white px-4 py-2 rounded mt-2"

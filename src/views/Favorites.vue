@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto py-4">
-    <h1 class="text-3xl font-bold mb-4">Favorites</h1>
+    <h1 class="text-3xl font-bold mb-4 mt-20">Favorites</h1>
     <div v-if="loading" class="text-center">Loading...</div>
     <div v-else-if="favorites.length === 0" class="text-center">
       You have no favorites yet.
@@ -14,7 +14,7 @@
         <img :src="item.image" alt="" class="w-24 h-24 object-cover" />
         <div class="flex-1">
           <h2 class="text-lg font-semibold">{{ item.title }}</h2>
-          <p class="text-gray-500">{{ item.price }}</p>
+          <p class="text-gray-500">${{ item.price }}</p>
         </div>
         <button
           @click="removeFromFavorites(item)"
