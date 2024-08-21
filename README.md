@@ -1,38 +1,57 @@
-# Flex Store
+# E-Commerce Vue.js Project
 
-A simple online store built with Vue.js, utilizing the FakeStore API for product data.
+## Overview
 
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Components](#components)
-- [Views](#views)
-- [APIs](#apis)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Introduction
-
-This project is an online store built with Vue.js. It fetches product data from the [FakeStore API](https://fakestoreapi.com/) and displays it in a user-friendly interface. Users can filter products by category, search for specific products, and sort products by price. The application also includes a product detail page with more information about each product.
+This is an e-commerce web application built using Vue.js. The application allows users to browse products, add items to their cart, and complete purchases. The project is designed with modern web technologies, ensuring a responsive and user-friendly interface.
 
 ## Features
 
-- Display a grid of products fetched from an API
-- Filter products by category
-- Search products by title
-- Sort products by price (ascending, descending, default)
-- View detailed information about a product
-- Add products to favorites
+- **Product Listing with Filtering and Sorting**: Users can filter products by category, sort by price, and search for specific products.
+- **Product Detail Pages**: Each product has a dedicated page that provides more detailed information.
+- **Shopping Cart Management**: Users can add products to the cart and proceed to checkout.
+- **Favorites and Comparison**: Users can add products to their favorites and compare them with others.
+- **Responsive Design**: The application is fully responsive and works on all devices.
+
+## Project Structure
+
+- **Product Listing**: Displays all available products with filtering and sorting options.
+- **Product Details**: Accessible via clicking on a product, shows detailed information.
+- **Shopping Cart**: Manages the items added to the cart.
+- **Favorites**: Allows users to save products for later viewing.
+- **Product Comparison**: Users can compare selected products side by side.
+
+## Demo
+
+[Link to the live demo](https://my-flexstore-final.vercel.app/)
+
+## Presentation
+
+[Link to the live demo](#)
+
+## Technologies Used
+
+- **Vue.js 3** - The Progressive JavaScript Framework
+- **Vuex** - State management
+- **Vue Router** - For navigation
+- **Axios** - For HTTP requests
+- **Vite** - For fast builds and hot module replacement
+- **Tailwind CSS** - Utility-first CSS framework
+- **Firebase** - For authentication and database (optional)
+- **Stripe** - For payment processing (optional)
 
 ## Installation
 
-To get started with this project, follow these steps:
+### Prerequisites
 
-1. **Clone the repository:**
+Ensure you have the following installed:
 
-   ```sh
-   git clone https://github.com/boikhutsodev/Module_3_BOIMOK510_BCL2401_GroupA_Boikhutso-Mokoka_JSF03.git
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- [npm](https://www.npmjs.com/)
+
+### Steps
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/your-username/ecommerce-vue.git
    ```
