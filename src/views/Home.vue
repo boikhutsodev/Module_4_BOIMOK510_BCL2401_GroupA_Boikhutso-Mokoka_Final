@@ -42,12 +42,12 @@
     <div v-if="loading" class="text-center">Loading...</div>
     <div
       v-else
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
     >
       <div
-        v-for="product in products"
+        v-for="product in filteredProducts"
         :key="product.id"
-        class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        class="card w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
       >
         <router-link :to="`/product/${product.id}`">
           <img
@@ -99,7 +99,7 @@
           </div>
 
           <!-- Cart, Favorite, and Compare Buttons -->
-          <div class="flex space-x-2 mt-4">
+          <div class="flex space-x-2 mt-4 mb-4">
             <button
               @click="addToCart(product)"
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -109,7 +109,7 @@
             <button
               @click="toggleFavorite(product)"
               :class="isFavorite(product.id) ? 'bg-red-500' : 'bg-gray-500'"
-              class="text-white font-medium rounded-lg text-sm px-4 py-2.5"
+              class="text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               {{ isFavorite(product.id) ? "- Favorites" : "+ Favorites" }}
             </button>
@@ -118,7 +118,7 @@
               :class="
                 isInComparison(product.id) ? 'bg-blue-500' : 'bg-gray-500'
               "
-              class="text-white font-medium rounded-lg text-sm px-4 py-2.5"
+              class="text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               {{ isInComparison(product.id) ? "- Compare" : "+ Compare" }}
             </button>
@@ -152,7 +152,6 @@ export default {
     /**
      * Fetches product categories from the API.
      */
-
     const fetchCategories = async () => {
       const response = await fetch(
         "https://fakestoreapi.com/products/categories"
@@ -162,21 +161,10 @@ export default {
     };
 
     /**
-     * Filters products based on the search query.
-     */
-
-    const searchProducts = () => {
-      filteredProducts.value = products.value.filter((product) =>
-        product.title.toLowerCase().includes(searchQuery.value.toLowerCase())
-      );
-    };
-
-    /**
      * Computes the filtered and sorted products based on category, sort order, and search query.
      *
      * @returns {Array<Object>} The filtered and sorted products.
      */
-
     const filteredProducts = computed(() => {
       let prods = products.value;
       if (selectedCategory.value) {
@@ -191,7 +179,6 @@ export default {
       } else if (sortOrder.value === "default") {
         prods = prods.sort((a, b) => a.id - b.id);
       }
-
       if (searchQuery.value) {
         prods = prods.filter((product) =>
           product.title.toLowerCase().includes(searchQuery.value.toLowerCase())
@@ -241,7 +228,6 @@ export default {
       searchQuery,
       selectedCategory,
       sortOrder,
-      searchProducts,
       filteredProducts,
     };
   },
